@@ -1,0 +1,23 @@
+{
+    "name": "sergios/yii2-worksection",
+    "description": "Worksection Api ",
+    "type": "yii2-extension",
+    "keywords": ["yii2","worksection","worksection-api"],
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Sergey",
+            "email": "SergeyDovzhanutsia@gmail.com"
+        }
+    ],
+    "require": {
+        "php": ">=7.0.0",
+        "yiisoft/yii2": "~2.0.0",
+        "yiisoft/yii2-httpclient": "^2.0"
+    },
+    "autoload": {
+        "psr-4": {
+            "sergios\\worksectionApi\\": ""
+        }
+    }
+}
