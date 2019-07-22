@@ -1,6 +1,6 @@
 <?php
 
-namespace sergios\yii2Worksection\src\collections;
+namespace sergios\worksectionApi\src\collections;
 
 class Collection
 {

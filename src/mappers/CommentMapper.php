@@ -1,13 +1,13 @@
 <?php
 
-namespace sergios\yii2Worksection\src\mappers;
+namespace sergios\worksectionApi\src\mappers;
 
 use Exception;
 use sergios\worksectionApi\src\collections\CommentCollection;
-use sergios\yii2Worksection\src\adapters\CommentAdapter;
-use sergios\yii2Worksection\src\models\Comment;
-use sergios\yii2Worksection\src\WSApiCriteria;
-use sergios\yii2Worksection\src\WSRequest;
+use sergios\worksectionApi\src\adapters\CommentAdapter;
+use sergios\worksectionApi\src\models\Comment;
+use sergios\worksectionApi\src\WSApiCriteria;
+use sergios\worksectionApi\src\WSRequest;
 
 class CommentMapper extends Mapper
 {

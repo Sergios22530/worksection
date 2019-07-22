@@ -1,7 +1,7 @@
 <?php
 
 
-namespace sergios\yii2Worksection\src;
+namespace sergios\worksectionApi\src;
 
 
 class WSApiCriteria

@@ -1,6 +1,6 @@
 <?php
 
-namespace sergios\yii2Worksection\src\models;
+namespace sergios\worksectionApi\src\models;
 
 use \yii\base\Model;
 

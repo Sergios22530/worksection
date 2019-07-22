@@ -2,24 +2,16 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="aaf6fc1e-8fe5-45f2-9913-f65950636876" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/src/helpers/ImageHelper.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/services/WSRequest.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/WSApi.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/WSApiCriteria.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/services/WSApiCriteria.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/adapters/Adapter.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/adapters/Adapter.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/adapters/CommentAdapter.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/adapters/CommentAdapter.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/adapters/UserAdapter.php" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/src/collections/Collection.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/collections/Collection.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/collections/CommentCollection.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/collections/CommentCollection.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/collections/UserCollection.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/helpers/ImageHelper.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/helpers/ImageHelper.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/mappers/CommentMapper.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/mappers/CommentMapper.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/mappers/Mapper.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/mappers/Mapper.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/mappers/UserMapper.php" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/src/models/Comment.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/models/Comment.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/models/Model.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/models/WSModel.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/models/User.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/models/interfaces/ModelInterface.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/traits/WSApiTrait.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/models/WSModel.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/models/WSModel.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/services/WSApiCriteria.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/services/WSApiCriteria.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/services/WSRequest.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/services/WSRequest.php" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -38,11 +30,11 @@
       <content type="file-editors">
         <state>
           <leaf>
-            <file pinned="false" current-in-tab="true">
+            <file pinned="false" current-in-tab="false">
               <entry file="file://$PROJECT_DIR$/src/mappers/CommentMapper.php">
                 <provider selected="true" editor-type-id="text-editor">
-                  <state relative-caret-position="473">
-                    <caret line="86" column="9" lean-forward="true" selection-start-line="86" selection-start-column="9" selection-end-line="86" selection-end-column="9" />
+                  <state relative-caret-position="1283">
+                    <caret line="86" column="9" selection-start-line="86" selection-start-column="9" selection-end-line="86" selection-end-column="9" />
                     <folding>
                       <element signature="e#55#69#0#PHP" expanded="true" />
                     </folding>
@@ -50,11 +42,11 @@
                 </provider>
               </entry>
             </file>
-            <file pinned="false" current-in-tab="false">
+            <file pinned="false" current-in-tab="true">
               <entry file="file://$PROJECT_DIR$/src/adapters/CommentAdapter.php">
                 <provider selected="true" editor-type-id="text-editor">
                   <state relative-caret-position="405">
-                    <caret line="30" column="5" lean-forward="true" selection-start-line="30" selection-start-column="5" selection-end-line="30" selection-end-column="5" />
+                    <caret line="30" column="5" selection-start-line="30" selection-start-column="5" selection-end-line="30" selection-end-column="5" />
                   </state>
                 </provider>
               </entry>
@@ -78,8 +70,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/services/WSApiCriteria.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="435">
-              <caret line="29" column="5" selection-start-line="29" selection-start-column="5" selection-end-line="29" selection-end-column="5" />
+            <state relative-caret-position="45">
+              <caret line="3" column="32" selection-start-line="3" selection-start-column="32" selection-end-line="3" selection-end-column="32" />
             </state>
           </provider>
         </entry>
@@ -87,8 +79,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/services/WSRequest.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="143">
-              <caret line="15" column="18" selection-start-line="15" selection-start-column="18" selection-end-line="15" selection-end-column="18" />
+            <state relative-caret-position="30">
+              <caret line="2" column="32" selection-start-line="2" selection-start-column="18" selection-end-line="2" selection-end-column="32" />
             </state>
           </provider>
         </entry>
@@ -105,11 +97,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/models/Comment.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="780">
-              <caret line="52" column="31" selection-start-line="52" selection-start-column="31" selection-end-line="52" selection-end-column="31" />
-              <folding>
-                <element signature="e#54#68#0#PHP" expanded="true" />
-              </folding>
+            <state relative-caret-position="75">
+              <caret line="5" column="42" selection-start-line="5" selection-start-column="42" selection-end-line="5" selection-end-column="42" />
             </state>
           </provider>
         </entry>
@@ -117,8 +106,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/helpers/ImageHelper.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="555">
-              <caret line="40" column="22" selection-start-line="40" selection-start-column="22" selection-end-line="40" selection-end-column="22" />
+            <state relative-caret-position="60">
+              <caret line="4" column="6" selection-start-line="4" selection-start-column="6" selection-end-line="4" selection-end-column="6" />
             </state>
           </provider>
         </entry>
@@ -150,15 +139,26 @@
           </provider>
         </entry>
       </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/composer.json">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="285">
+              <caret line="19" column="36" selection-start-line="19" selection-start-column="22" selection-end-line="19" selection-end-column="36" />
+            </state>
+          </provider>
+        </entry>
+      </file>
     </leaf>
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
       <find>String</find>
       <find>page</find>
+      <find>yii2Worksection</find>
     </findStrings>
     <replaceStrings>
       <replace>string</replace>
+      <replace>worksectionApi</replace>
     </replaceStrings>
   </component>
   <component name="Git.Settings">
@@ -167,17 +167,17 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/src/services/WSRequest.php" />
-        <option value="$PROJECT_DIR$/src/services/WSApiCriteria.php" />
         <option value="$PROJECT_DIR$/src/adapters/Adapter.php" />
         <option value="$PROJECT_DIR$/src/helpers/ImageHelper.php" />
         <option value="$PROJECT_DIR$/src/models/Model.php" />
         <option value="$PROJECT_DIR$/src/models/WSModel.php" />
-        <option value="$PROJECT_DIR$/src/models/Comment.php" />
         <option value="$PROJECT_DIR$/src/adapters/CommentAdapter.php" />
         <option value="$PROJECT_DIR$/src/mappers/CommentMapper.php" />
         <option value="$PROJECT_DIR$/src/mappers/Mapper.php" />
         <option value="$PROJECT_DIR$/src/collections/Collection.php" />
+        <option value="$PROJECT_DIR$/src/services/WSRequest.php" />
+        <option value="$PROJECT_DIR$/src/services/WSApiCriteria.php" />
+        <option value="$PROJECT_DIR$/src/models/Comment.php" />
       </list>
     </option>
   </component>
@@ -235,6 +235,12 @@
               <item name="worksection" type="b2602c69:ProjectViewProjectNode" />
               <item name="worksection" type="462c0819:PsiDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="helpers" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="worksection" type="b2602c69:ProjectViewProjectNode" />
+              <item name="worksection" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
               <item name="mappers" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
@@ -256,8 +262,9 @@
     </panes>
   </component>
   <component name="PropertiesComponent">
+    <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/../../../litota.serve.local" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../../../new-doris-agency.local" />
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
     <property name="nodejs_npm_path_reset_for_default_project" value="true" />
     <property name="settings.editor.selected.configurable" value="editor.preferences.gutterIcons" />
@@ -292,16 +299,15 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1563779129009</updated>
-      <workItem from="1563779130127" duration="5417000" />
+      <workItem from="1563779130127" duration="7115000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="5417000" />
+    <option name="totallyTimeSpent" value="7115000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-1688" y="-8" width="1696" height="1036" extended-state="6" />
-    <editor active="true" />
     <layout>
       <window_info id="Favorites" side_tool="true" />
       <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.25" />
@@ -347,55 +353,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/helpers/ImageHelper.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="555">
-          <caret line="40" column="22" selection-start-line="40" selection-start-column="22" selection-end-line="40" selection-end-column="22" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/services/WSRequest.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="143">
-          <caret line="15" column="18" selection-start-line="15" selection-start-column="18" selection-end-line="15" selection-end-column="18" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/services/WSApiCriteria.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="435">
-          <caret line="29" column="5" selection-start-line="29" selection-start-column="5" selection-end-line="29" selection-end-column="5" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/models/WSModel.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="90">
           <caret line="6" column="13" selection-start-line="6" selection-start-column="6" selection-end-line="6" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/adapters/Adapter.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="150">
-          <caret line="12" column="69" selection-start-line="12" selection-start-column="69" selection-end-line="12" selection-end-column="69" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/models/Comment.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="780">
-          <caret line="52" column="31" selection-start-line="52" selection-start-column="31" selection-end-line="52" selection-end-column="31" />
-          <folding>
-            <element signature="e#54#68#0#PHP" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/adapters/CommentAdapter.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="405">
-          <caret line="30" column="5" lean-forward="true" selection-start-line="30" selection-start-column="5" selection-end-line="30" selection-end-column="5" />
         </state>
       </provider>
     </entry>
@@ -461,6 +422,51 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/composer.json">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="285">
+          <caret line="19" column="36" selection-start-line="19" selection-start-column="22" selection-end-line="19" selection-end-column="36" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/services/WSRequest.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="30">
+          <caret line="2" column="32" selection-start-line="2" selection-start-column="18" selection-end-line="2" selection-end-column="32" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/services/WSApiCriteria.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="45">
+          <caret line="3" column="32" selection-start-line="3" selection-start-column="32" selection-end-line="3" selection-end-column="32" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/mappers/CommentMapper.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1283">
+          <caret line="86" column="9" selection-start-line="86" selection-start-column="9" selection-end-line="86" selection-end-column="9" />
+          <folding>
+            <element signature="e#55#69#0#PHP" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/models/Comment.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="75">
+          <caret line="5" column="42" selection-start-line="5" selection-start-column="42" selection-end-line="5" selection-end-column="42" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/helpers/ImageHelper.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="60">
+          <caret line="4" column="6" selection-start-line="4" selection-start-column="6" selection-end-line="4" selection-end-column="6" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/collections/CommentCollection.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="90">
@@ -468,13 +474,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/mappers/CommentMapper.php">
+    <entry file="file://$PROJECT_DIR$/src/adapters/Adapter.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="473">
-          <caret line="86" column="9" lean-forward="true" selection-start-line="86" selection-start-column="9" selection-end-line="86" selection-end-column="9" />
-          <folding>
-            <element signature="e#55#69#0#PHP" expanded="true" />
-          </folding>
+        <state relative-caret-position="150">
+          <caret line="12" column="69" selection-start-line="12" selection-start-column="69" selection-end-line="12" selection-end-column="69" />
         </state>
       </provider>
     </entry>
@@ -482,6 +485,13 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="255">
           <caret line="17" column="5" selection-start-line="17" selection-start-column="5" selection-end-line="17" selection-end-column="5" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/adapters/CommentAdapter.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="405">
+          <caret line="30" column="5" selection-start-line="30" selection-start-column="5" selection-end-line="30" selection-end-column="5" />
         </state>
       </provider>
     </entry>

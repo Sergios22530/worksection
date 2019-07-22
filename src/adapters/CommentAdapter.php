@@ -1,10 +1,10 @@
 <?php
 
-namespace sergios\yii2Worksection\src\adapters;
+namespace sergios\worksectionApi\src\adapters;
 
-use sergios\yii2Worksection\src\mappers\CommentMapper;
-use sergios\yii2Worksection\src\mappers\Mapper;
-use sergios\yii2Worksection\src\models\Comment;
+use sergios\worksectionApi\src\mappers\CommentMapper;
+use sergios\worksectionApi\src\mappers\Mapper;
+use sergios\worksectionApi\src\models\Comment;
 use yii\helpers\VarDumper;
 
 class CommentAdapter extends Adapter

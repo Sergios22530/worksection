@@ -1,6 +1,6 @@
 <?php
 
-namespace sergios\yii2Worksection\src\helpers;
+namespace sergios\worksectionApi\src\helpers;
 
 use Yii;
 use yii\helpers\FileHelper;

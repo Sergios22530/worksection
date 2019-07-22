@@ -1,13 +1,13 @@
 <?php
 
-namespace sergios\yii2Worksection\src;
+namespace sergios\worksectionApi\src;
 
 use yii\httpclient\Client;
 use yii\httpclient\Request;
 
 /**
  * Class WSApi
- * @package sergios\yii2Worksection\src
+ * @package sergios\worksectionApi\src
  *
  * @property Client $httpClient
  */

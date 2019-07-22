@@ -1,9 +1,9 @@
 <?php
 
-namespace sergios\yii2Worksection\src\models;
+namespace sergios\worksectionApi\src\models;
 
 use Exception;
-use sergios\yii2Worksection\src\helpers\ImageHelper;
+use sergios\worksectionApi\src\helpers\ImageHelper;
 use yii\web\UploadedFile;
 
 class Comment extends WSModel

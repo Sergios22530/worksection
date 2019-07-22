@@ -1,16 +1,16 @@
 <?php
 
-namespace sergios\yii2Worksection\src\mappers;
+namespace sergios\worksectionApi\src\mappers;
 
-use sergios\yii2Worksection\src\adapters\Adapter;
-use sergios\yii2Worksection\src\collections\Collection;
-use sergios\yii2Worksection\src\models\interfaces\ModelInterface;
-use sergios\yii2Worksection\src\models\Model;
-use sergios\yii2Worksection\src\WSApi;
+use sergios\worksectionApi\src\adapters\Adapter;
+use sergios\worksectionApi\src\collections\Collection;
+use sergios\worksectionApi\src\models\interfaces\ModelInterface;
+use sergios\worksectionApi\src\models\Model;
+use sergios\worksectionApi\src\WSApi;
 
 /**
  * Class Mapper
- * @package frontend\components\yii2Worksection\src\mappers
+ * @package frontend\components\worksectionApi\src\mappers
  *
  */
 abstract class Mapper //extends Model
