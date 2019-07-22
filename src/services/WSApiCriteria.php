@@ -24,7 +24,7 @@ class WSApiCriteria
      */
     public function setPage($page)
     {
-        $this->page = $page||'';
+        $this->page = $page || '';
 
         return $this;
     }
@@ -61,6 +61,6 @@ class WSApiCriteria
      */
     public function getParams()
     {
-        return $this->params||[];
+        return $this->params || [];
     }
 }

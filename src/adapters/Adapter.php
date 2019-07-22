@@ -10,5 +10,5 @@ abstract class Adapter
 {
     abstract public static function toApi(Comment $comment):array;
 
-    abstract public static function toClient():array;
+    abstract public static function toClient(array $attributes):array;
 }

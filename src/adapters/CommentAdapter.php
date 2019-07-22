@@ -11,14 +11,22 @@ class CommentAdapter extends Adapter
 {
 
 
-    public static function toApi(Comment $comment):array
+    public static function toApi(Comment $comment): array
     {
-        return [];
+        $attach = [];
+        $image = $comment->getImage();
+        if ($image) {
+            $attach['attach[]'] = $image;
+        }
+
+        return array_merge([
+            'email_user_from' => $comment->email,
+            'text' => $comment->text,
+        ], $attach, $comment->getTodoList());
     }
 
-    public static function toClient():array
+    public static function toClient(array $attributes): array
     {
-        // TODO: Implement toClient() method.
-        return [];
+        return $attributes;
     }
 }

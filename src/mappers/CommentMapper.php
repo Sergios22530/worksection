@@ -2,49 +2,39 @@
 
 namespace sergios\yii2Worksection\src\mappers;
 
+use Exception;
+use sergios\worksectionApi\src\collections\CommentCollection;
 use sergios\yii2Worksection\src\adapters\CommentAdapter;
 use sergios\yii2Worksection\src\models\Comment;
-use sergios\yii2Worksection\src\models\interfaces\ModelInterface;
-use sergios\yii2Worksection\src\models\Model;
-use sergios\yii2Worksection\src\validators\WSApiValidator;
-use sergios\yii2Worksection\src\WSApi;
 use sergios\yii2Worksection\src\WSApiCriteria;
-use yii\helpers\VarDumper;
+use sergios\yii2Worksection\src\WSRequest;
 
 class CommentMapper extends Mapper
 {
 
-    protected $action = 'get_comments';
+    private $page;
 
-    //TODO remove all this params
-    public function __construct(String $apiAction, String $projectId, String $taskId = '')
+    public function __construct(string $page)
     {
-        parent::__construct();
-
-        $this->wsApi->setAction($apiAction);
-        $this->wsApi->setProjectId($projectId);
-        $this->wsApi->setTaskId($taskId);
-
-        $this->adapter = new CommentAdapter();
+        $this->page = $page;
     }
 
-
-    public function findByUserEmail()
+    public function findByAttributes(array $params)
     {
-        $this->adapter->toApi();
-    }
+        if (empty($params)) {
+            throw new Exception("Params cannot be empty");
+        }
 
-    public function findByAttributes($comment)
-    {
         $criteria = (new WSApiCriteria('get_comments'))
-            ->setPage($comment->getPage())
-            ->setParams(CommentAdapter::toApi($comment));
+            ->setPage($this->page)
+            ->setParams($params);
 
-        $data = wsApi::getInstance()->get($criteria);
-        if($data){
+        $data = WSRequest::getInstance()->get($criteria);
+        if ($data) {
             return $this->createCollection($data);
         }
 
+        //TODO: create error request
         return $data;
     }
 
@@ -63,18 +53,58 @@ class CommentMapper extends Mapper
         // TODO: Implement update() method.
     }
 
-    public function create()
+    public function create($model)
     {
-        // TODO: Implement create() method.
+        if (empty($model)) {
+            throw new Exception("Model cannot be empty");
+        }
+
+        if (!$model->validate()) {
+            throw new Exception("Model has errors: " . implode('\n', $model->getErrors()));
+        }
+
+        $criteria = (new WSApiCriteria('get_comments'))
+            ->setPage($this->page)
+            ->setParams(CommentAdapter::toApi($model));
+
+        $data = WSRequest::getInstance()->post($criteria);
+
+        if ($data) {
+            return $this->createCollection($data);
+        }
+
+        //TODO: create error request
+        return $data;
     }
 
-    protected function createModel()
+    protected function createModel(array $attributes)
     {
-        // TODO: Implement createModel() method.
+        $model = new Comment();
+        $model->setAttributes(CommentAdapter::toClient($attributes));
+
+        if ($model->validate()) {
+            return $model;
+        }
+
+        //TODO logger need here
+        return null;
     }
 
-    protected function createCollection()
+    protected function createCollection(array $data)
     {
-        // TODO: Implement createCollection() method.
+        $collection = new CommentCollection();
+
+        foreach ($data as $attributes) {
+
+            $model = $this->createModel($attributes);
+            if ($model) {
+                $collection->setModel($model);
+                continue;
+            }
+
+            //todo set logger here
+        }
+
+        return $collection;
     }
 }

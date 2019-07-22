@@ -3,6 +3,7 @@
 namespace sergios\yii2Worksection\src\mappers;
 
 use sergios\yii2Worksection\src\adapters\Adapter;
+use sergios\yii2Worksection\src\collections\Collection;
 use sergios\yii2Worksection\src\models\interfaces\ModelInterface;
 use sergios\yii2Worksection\src\models\Model;
 use sergios\yii2Worksection\src\WSApi;
@@ -11,19 +12,11 @@ use sergios\yii2Worksection\src\WSApi;
  * Class Mapper
  * @package frontend\components\yii2Worksection\src\mappers
  *
- * @property WSApi $wsApi
  */
 abstract class Mapper //extends Model
 {
 
-    protected $adapter;
-
-
-    abstract public function findByUserName($userName);
-
-    abstract public function findByUserEmail();
-
-    abstract public function findByAttributes($model);
+    abstract public function findByAttributes(array $params);
 
     abstract public function delete();
 
@@ -31,12 +24,9 @@ abstract class Mapper //extends Model
 
     abstract public function update();
 
-    abstract public function create();
+    abstract public function create($model);
 
-    abstract protected function createModel();
+    abstract protected function createModel(array $attributes);
 
-    abstract protected function createCollection();
-
-
-
+    abstract protected function createCollection(array $data);
 }

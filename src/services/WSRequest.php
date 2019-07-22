@@ -11,7 +11,7 @@ use yii\httpclient\Request;
  *
  * @property Client $httpClient
  */
-final class WSApi
+final class WSRequest
 {
     protected $apiKey;
     protected $apiDomain;
@@ -29,7 +29,7 @@ final class WSApi
     /**
      * gets the instance via lazy initialization (created on first usage)
      */
-    public static function getInstance(): WSApi
+    public static function getInstance(): WSRequest
     {
         if (null === static::$instance) {
             static::$instance = new static();
