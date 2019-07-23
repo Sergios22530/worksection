@@ -1,10 +1,8 @@
 <?php
 
-
 namespace sergios\worksectionApi\src\collections;
 
-
-class CommentCollection extends Collection
+class UserCollection extends Collection
 {
-    
+
 }

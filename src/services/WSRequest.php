@@ -1,9 +1,13 @@
 <?php
 
-namespace sergios\worksectionApi\src;
+namespace sergios\worksectionApi\src\services;
 
+use Exception;
+use yii\base\InvalidConfigException;
+use yii\helpers\ArrayHelper;
 use yii\httpclient\Client;
 use yii\httpclient\Request;
+use Yii;
 
 /**
  * Class WSApi
@@ -41,57 +45,60 @@ final class WSRequest
 
     /**
      * Set request parameters before sending request
-     * @param WSApiCriteria $criteria
+     * @param WSRequestCriteria $criteria
      * @return bool | array
      */
-    public function get(WSApiCriteria $criteria)
+    public function get(WSRequestCriteria $criteria)
     {
         return $this->send($criteria, self::GET_METHOD);
     }
 
     /**
      * Set request parameters before sending request
-     * @param WSApiCriteria $criteria
+     * @param WSRequestCriteria $criteria
      * @return bool | array
      */
-    public function post(WSApiCriteria $criteria)
+    public function post(WSRequestCriteria $criteria)
     {
         return $this->send($criteria, self::POST_METHOD);
     }
 
     /**
      * Set request parameters before sending request
-     * @param WSApiCriteria $criteria
+     * @param WSRequestCriteria $criteria
      * @param String $method
      * @return bool | array
      */
-    private function send(WSApiCriteria $criteria, String $method)
+    private function send(WSRequestCriteria $criteria, String $method)
     {
         $url = $this->generateApiUrl($criteria);
 
-        /**
-         * @var $response Request
-         */
-        $response = $this->httpClient->createRequest()
-            ->setFormat(Client::FORMAT_JSON)
-            ->setMethod($method)
+        /** @var $response Request */
+        $response = $this->httpClient->createRequest();
+        if ($method == self::GET_METHOD) {
+            $response->setFormat(Client::FORMAT_JSON);
+        }
+        $response->setMethod($method)
             ->setUrl($url)
-            ->setData($criteria->getParams())
-            ->send();
+            ->addData($criteria->getParams());
+        $response = $response->send();
 
         return ($response->getData()['status'] == self::SUCCESS_ANSWER) ? $response->getData() : false;
     }
 
     /**
      * Generate api request url with http request params
-     * @param WSApiCriteria $criteria
+     * @param WSRequestCriteria $criteria
      * @return String full url with action and hash params
      */
-    public function generateApiUrl(WSApiCriteria $criteria): String
+    public function generateApiUrl(WSRequestCriteria $criteria): String
     {
+        $page = $criteria->getPage();
         $url = "https://doris.worksection.com/api/admin/?action={$criteria->getAction()}";
-        $hash = $this->generateHash($criteria->getAction(), $criteria->getPage());
-        return $url."&hash={$hash}";
+        $hash = $this->generateHash($criteria->getAction(), $page);
+        $page = ($page) ? "&page={$page}" : '';
+
+        return $url . $page . "&hash={$hash}";
     }
 
     /**
@@ -112,6 +119,29 @@ final class WSRequest
     private function __construct()
     {
         $this->httpClient = new Client();
+        $this->setApiConfig();
+    }
+
+    /**
+     * @throws Exception
+     */
+    private function setApiConfig()
+    {
+        try {
+            $this->apiDomain = Yii::$app->params['worksection-api']['domain'];
+            $this->apiKey = Yii::$app->params['worksection-api']['apiKey'];
+
+        } catch (Exception $e) {
+            throw new Exception('Set global params for api! (\'worksection-api\' => [\'domain\' => apiDomain, \'apiKey\' => key])');
+        }
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getApiDomain()
+    {
+        return $this->apiDomain;
     }
 
     /**

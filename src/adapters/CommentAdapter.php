@@ -2,14 +2,14 @@
 
 namespace sergios\worksectionApi\src\adapters;
 
-use sergios\worksectionApi\src\mappers\CommentMapper;
-use sergios\worksectionApi\src\mappers\Mapper;
 use sergios\worksectionApi\src\models\Comment;
-use yii\helpers\VarDumper;
+use sergios\worksectionApi\src\models\User;
+use sergios\worksectionApi\src\services\WSRequest;
+use Yii;
+use yii\helpers\ArrayHelper;
 
 class CommentAdapter extends Adapter
 {
-
 
     public static function toApi(Comment $comment): array
     {
@@ -20,13 +20,31 @@ class CommentAdapter extends Adapter
         }
 
         return array_merge([
-            'email_user_from' => $comment->email,
+            'email_user_from' => $comment->user->email,
             'text' => $comment->text,
         ], $attach, $comment->getTodoList());
     }
 
-    public static function toClient(array $attributes): array
+    public static function toClient(array $attribute): array
     {
-        return $attributes;
+        $user = new User();
+        $user->setAttributes([
+            'email' => $attribute['user_from']['email'],
+            'name' => $attribute['user_from']['name']
+        ]);
+
+        $resultAttributes = [
+            'text' => $attribute['text'],
+        ];
+
+        if ($user->validate()) {
+            $resultAttributes['user'] = $user;
+        }
+
+        if (ArrayHelper::keyExists('files', $attribute) && !empty($attribute['files'])) {
+            $resultAttributes['file'] = WSRequest::getInstance()->getApiDomain() . $attribute['files'][0]['link'];
+        }
+
+        return $resultAttributes;
     }
 }

@@ -3,14 +3,17 @@
 namespace sergios\worksectionApi\src\mappers;
 
 use Exception;
-use sergios\worksectionApi\src\collections\CommentCollection;
 use sergios\worksectionApi\src\adapters\CommentAdapter;
+use sergios\worksectionApi\src\collections\CommentCollection;
+use sergios\worksectionApi\src\collections\UserCollection;
 use sergios\worksectionApi\src\models\Comment;
-use sergios\worksectionApi\src\services\WSRequestCriteria;
+use sergios\worksectionApi\src\models\User;
 use sergios\worksectionApi\src\services\WSRequest;
+use sergios\worksectionApi\src\services\WSRequestCriteria;
 use Yii;
+use sergios\worksectionApi\src\adapters\UserAdapter;
 
-class CommentMapper extends Mapper
+class UserMapper extends Mapper
 {
     private $page;
 
@@ -21,7 +24,7 @@ class CommentMapper extends Mapper
 
     public function findAll()
     {
-        $criteria = (new WSRequestCriteria('get_comments'))
+        $criteria = (new WSRequestCriteria('get_users'))
             ->setPage($this->page);
 
         $data = WSRequest::getInstance()->get($criteria);
@@ -41,7 +44,7 @@ class CommentMapper extends Mapper
 
         Yii::$app->params['filterParams'] = $params;
 
-        $criteria = (new WSRequestCriteria('get_comments'))
+        $criteria = (new WSRequestCriteria('get_users'))
             ->setPage($this->page)
             ->setParams($params);
 
@@ -56,49 +59,30 @@ class CommentMapper extends Mapper
 
     public function delete()
     {
-        // TODO: Implement delete() method.
+
     }
 
     public function deleteByAttributes()
     {
-        // TODO: Implement deleteByAttributes() method.
+
     }
 
     public function update()
     {
-        // TODO: Implement update() method.
+
     }
 
     public function create($model)
     {
-        if (empty($model)) {
-            throw new Exception("Model cannot be empty");
-        }
 
-        if (!$model->validate()) {
-            throw new Exception("Model has errors: " . implode('\n', $model->getErrors()));
-        }
-
-        $criteria = (new WSRequestCriteria('post_comment'))
-            ->setPage($this->page)
-            ->setParams(CommentAdapter::toApi($model));
-
-        $data = WSRequest::getInstance()->post($criteria);
-
-        if ($data) {
-            return ['url' => $data['url']];
-        }
-
-        //TODO: create error request
-        return $data;
     }
 
     protected function createModel(array $attributes)
     {
-        $model = new Comment();
-        $model->setAttributes(CommentAdapter::toClient($attributes));
+        $model = new User();
+        $model->setAttributes(UserAdapter::toClient($attributes));
 
-        if ($model->validate() && $model->issetUser()) {
+        if ($model->validate()) {
             return $model;
         }
 
@@ -108,7 +92,7 @@ class CommentMapper extends Mapper
 
     protected function createCollection(array $data)
     {
-        $collection = new CommentCollection();
+        $collection = new UserCollection();
 
         foreach ($data as $attributes) {
 

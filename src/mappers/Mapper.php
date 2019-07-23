@@ -15,7 +15,8 @@ use sergios\worksectionApi\src\WSApi;
  */
 abstract class Mapper //extends Model
 {
-
+    abstract public function findAll();  
+    
     abstract public function findByAttributes(array $params);
 
     abstract public function delete();

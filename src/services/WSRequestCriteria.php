@@ -1,14 +1,14 @@
 <?php
 
 
-namespace sergios\worksectionApi\src;
+namespace sergios\worksectionApi\src\services;
 
 
-class WSApiCriteria
+class WSRequestCriteria
 {
     private $action;
     private $page;
-    private $params;
+    private $params = [];
 
 
     public function __construct(String $action)
@@ -20,12 +20,11 @@ class WSApiCriteria
 
     /**
      * @param mixed $page
-     * @return WSApiCriteria
+     * @return WSRequestCriteria
      */
     public function setPage($page)
     {
-        $this->page = $page || '';
-
+        $this->page = (!empty($page)) ? $page : '';
         return $this;
     }
 
@@ -61,6 +60,6 @@ class WSApiCriteria
      */
     public function getParams()
     {
-        return $this->params || [];
+        return (!empty($this->params)) ? $this->params : [];
     }
 }

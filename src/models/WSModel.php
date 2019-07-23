@@ -4,8 +4,7 @@ namespace sergios\worksectionApi\src\models;
 
 use \yii\base\Model;
 
-class WSModel extends Model
+abstract class WSModel extends Model
 {
-
-
+    abstract protected function filter(array $attributes);
 }
