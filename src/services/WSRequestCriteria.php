@@ -4,18 +4,34 @@
 namespace sergios\worksectionApi\src\services;
 
 
+use sergios\worksectionApi\src\models\Comment;
+use Yii;
+
 class WSRequestCriteria
 {
     private $action;
     private $page;
     private $params = [];
+    private $filePath = null;
 
 
     public function __construct(String $action)
     {
         $this->action = $action;
 
+        $file = (new Comment())->getImage();
+
+        $this->filePath = ($file) ? $file : null;
+
         return $this;
+    }
+
+    /**
+     * @return string|null
+     */
+    public function getFilePath()
+    {
+        return $this->filePath;
     }
 
     /**

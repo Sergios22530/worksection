@@ -5,6 +5,8 @@ namespace sergios\worksectionApi\src\services;
 use Exception;
 use yii\base\InvalidConfigException;
 use yii\helpers\ArrayHelper;
+use yii\helpers\FileHelper;
+use yii\helpers\VarDumper;
 use yii\httpclient\Client;
 use yii\httpclient\Request;
 use Yii;
@@ -78,9 +80,13 @@ final class WSRequest
         if ($method == self::GET_METHOD) {
             $response->setFormat(Client::FORMAT_JSON);
         }
-        $response->setMethod($method)
-            ->setUrl($url)
-            ->addData($criteria->getParams());
+      
+        $response->setMethod($method)->setUrl($url)->addData($criteria->getParams());
+
+        if($criteria->getFilePath()){
+            $response->addFile('attach[]', $criteria->getFilePath());
+        }
+
         $response = $response->send();
 
         return ($response->getData()['status'] == self::SUCCESS_ANSWER) ? $response->getData() : false;

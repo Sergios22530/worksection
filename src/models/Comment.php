@@ -70,7 +70,7 @@ class Comment extends WSModel
         throw new Exception('File is not defined');
     }
 
-    public function setImageFromUploadedInstance(UploadedFile $image)
+    public function saveImage(UploadedFile $image)
     {
         $imageHelper = new ImageHelper();
         $this->pathToImage = $imageHelper->saveImage($image);
