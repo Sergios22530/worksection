@@ -4,11 +4,11 @@ namespace sergios\worksectionApi\src\models;
 
 use Exception;
 use sergios\worksectionApi\src\helpers\ImageHelper;
+use sergios\worksectionApi\src\models\User;
 use Yii;
 use yii\helpers\ArrayHelper;
 use yii\helpers\FileHelper;
 use yii\web\UploadedFile;
-use sergios\worksectionApi\src\models\User;
 
 /**
  * Class Comment
@@ -24,7 +24,7 @@ class Comment extends WSModel
     public $text;
     public $date_added; // example  2019-07-24 11:01
     public $fileUrl;
-    
+
     public $user = null;
 
     protected $pathToImage = '';
@@ -35,7 +35,7 @@ class Comment extends WSModel
         return [
             ['text', 'required'],
             ['user', 'validateUser'],
-            [['text', 'fileUrl','date_added'], 'string'],
+            [['text', 'fileUrl', 'date_added'], 'string'],
         ];
     }
 
@@ -46,6 +46,10 @@ class Comment extends WSModel
         }
     }
 
+    public function setUser(User $user)
+    {
+        $this->user = $user;
+    }
 
     public function setTodo(int $index, string $text)
     {
@@ -72,15 +76,12 @@ class Comment extends WSModel
         throw new Exception('File is not defined');
     }
 
-    public function saveImage(UploadedFile $image, array $exeptedMineTypes = ['jpeg', 'png', 'jpeg'])
+    public function saveImage(UploadedFile $image)
     {
-        if (!ArrayHelper::isIn($image->getExtension(), $exeptedMineTypes)) {
-            throw new Exception('Exempted uploaded mine types are ' . implode(',', $exeptedMineTypes));
-        }
         $imageHelper = new ImageHelper();
         $this->pathToImage = $imageHelper->saveImage($image);
     }
-    
+
     public function getImage()
     {
         return $this->pathToImage;
@@ -96,8 +97,7 @@ class Comment extends WSModel
         return $this->user;
     }
 
-    public function setUser(User $user)
-    {
-        $this->user = $user;
+    public static function getFilteredFields(){
+        return [''];
     }
 }

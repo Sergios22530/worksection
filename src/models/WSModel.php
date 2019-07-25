@@ -6,5 +6,5 @@ use \yii\base\Model;
 
 abstract class WSModel extends Model
 {
-    
+    abstract static public function getFilteredFields();
 }

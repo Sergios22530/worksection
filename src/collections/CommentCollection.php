@@ -24,6 +24,8 @@ class CommentCollection extends Collection
     /**
      * Filter and validate comment models
      * @param array $params
+     * @return CommentCollection
+     * @throws Exception
      */
     public function filterByAttributes(array $params)
     {
@@ -49,11 +51,12 @@ class CommentCollection extends Collection
     /**
      * Filter and validate user models
      * @param array $params
+     * @return CommentCollection
      * @throws InvalidConfigException
      */
     protected function filterByUser(array $params)
     {
-        if (ArrayHelper::keyExists('user', $params)) {
+        if (!ArrayHelper::keyExists('user', $params)) {
             $userAttributes = $params['user'];
             if (!is_array($userAttributes)) {
                 throw new InvalidConfigException('user attribute must be array');

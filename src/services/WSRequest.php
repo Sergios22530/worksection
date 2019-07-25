@@ -21,7 +21,6 @@ final class WSRequest
 {
     protected $apiKey;
     protected $apiDomain;
-    protected $uploadPath;
 
     private $httpClient = null;
 
@@ -32,6 +31,26 @@ final class WSRequest
 
     const SUCCESS_ANSWER = 'ok';
     const ERROR_ANSWER = 'error';
+
+    const ANSWERS_CODES = [
+        0 => 'URL проекта недействителен',
+        1 => 'URL проекта обязательный',
+        2 => 'Недействителен xэш',
+        3 => 'Проект недействителен',
+        4 => 'Задача недействительная',
+        5 => 'Подзадача недействительная',
+        6 => 'Страница недействительна',
+        7 => 'Проект обязательный',
+        8 => 'Задача обязательная',
+        9 => 'Подзадача обязательная',
+        10 => 'Поле обязательно для заполнения, message_details содержит название поля',
+        11 => 'Неверный адрес электронной почты, message_details содержит неверный адрес электронной почты',
+        12 => 'Задача уже закрыта',
+        13 => 'В задание есть дети',
+        14 => 'Подзадача уже закрыта',
+        15 => 'У подзадачи есть дети',
+        16 => 'Квота превышена'
+    ];
 
     /**
      * gets the instance via lazy initialization (created on first usage)
@@ -50,6 +69,7 @@ final class WSRequest
      * Set request parameters before sending request
      * @param WSRequestCriteria $criteria
      * @return bool | array
+     * @throws Exception
      */
     public function get(WSRequestCriteria $criteria)
     {
@@ -60,6 +80,7 @@ final class WSRequest
      * Set request parameters before sending request
      * @param WSRequestCriteria $criteria
      * @return bool | array
+     * @throws Exception
      */
     public function post(WSRequestCriteria $criteria)
     {
@@ -71,6 +92,7 @@ final class WSRequest
      * @param WSRequestCriteria $criteria
      * @param String $method
      * @return bool | array
+     * @throws Exception
      */
     private function send(WSRequestCriteria $criteria, String $method)
     {
@@ -89,12 +111,13 @@ final class WSRequest
             $response->addFile('attach[]', $filePath);
         }
 
-        $response = $response->send();
+        $responseData = ($response->send())->getData();
 
-        if ($response->getData()['status'] == self::ERROR_ANSWER) {
-            $this->generateErrorAnwer($response->getData()['status_code']);
+        if ($responseData['status'] === self::SUCCESS_ANSWER) {
+            return $responseData;
         }
-        return ($response->getData()['status'] == self::SUCCESS_ANSWER) ? $response->getData() : false;
+
+        throw new Exception(self::ANSWERS_CODES[$responseData['status_code']] || 'Произошла непредвиденная ошибка');
     }
 
     /**
@@ -141,9 +164,8 @@ final class WSRequest
         try {
             $this->apiDomain = Yii::$app->params['worksection-api']['domain'];
             $this->apiKey = Yii::$app->params['worksection-api']['apiKey'];
-            $this->uploadPath = Yii::$app->params['worksection-api']['uploadPath'];
         } catch (Exception $e) {
-            throw new Exception('Set global params for api! (\'worksection-api\' => [\'domain\' => apiDomain, \'apiKey\' => key, \'uploadPath\' => path])');
+            throw new Exception("Set global params for api! ('worksection-api' => ['domain' => apiDomain, 'apiKey' => key])");
         }
     }
 
@@ -153,14 +175,6 @@ final class WSRequest
     public function getApiDomain()
     {
         return $this->apiDomain;
-    }
-
-    /**
-     * @return mixed
-     */
-    public function getUploadPath()
-    {
-        return $this->uploadPath;
     }
 
     /**
@@ -176,44 +190,4 @@ final class WSRequest
     private function __wakeup()
     {
     }
-
-    /**
-     * @return array
-     */
-    protected function statusCodes()
-    {
-        return [
-            0 => 'URL проекта недействителен',
-            1 => 'URL проекта обязательный',
-            2 => 'Недействителен xэш',
-            3 => 'Проект недействителен',
-            4 => 'Задача недействительная',
-            5 => 'Подзадача недействительная',
-            6 => 'Страница недействительна',
-            7 => 'Проект обязательный',
-            8 => 'Задача обязательная',
-            9 => 'Подзадача обязательная',
-            10 => 'Поле обязательно для заполнения, message_details содержит название поля',
-            11 => 'Неверный адрес электронной почты, message_details содержит неверный адрес электронной почты',
-            12 => 'Задача уже закрыта',
-            13 => 'В задание есть дети',
-            14 => 'Подзадача уже закрыта',
-            15 => 'У подзадачи есть дети',
-            16 => 'Квота превышена'
-        ];
-    }
-
-    /**
-     * @param int $statusCode
-     * @throws Exception
-     */
-    protected function generateErrorAnwer(int $statusCode)
-    {
-        $statuses = $this->statusCodes();
-        if (ArrayHelper::keyExists($statusCode, $statuses)) {
-            throw new Exception($statuses[$statusCode]);
-        }
-
-    }
-
 }

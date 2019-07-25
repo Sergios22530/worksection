@@ -13,11 +13,13 @@ class ImageHelper
     private $directory = '';
     private $path = '';
 
+    const EXPECTED_TYPES = ['jpeg', 'png', 'jpeg'];
+
     public function __construct()
     {
-        $imagePath = WSRequest::getInstance()->getUploadPath();
-        if (isset(Yii::$app->params['bugReport']['imagePath'])) {
-            $imagePath = Yii::$app->params['bugReport']['imagePath'];
+        $imagePath = @Yii::$app->params['worksection-api']['uploadPath'];
+        if (!isset($imagePath)) {
+            throw new Exception("Set global params for api! ('worksection-api' => ['uploadPath' => uploadPath])");
         }
 
         $this->directory = Yii::getAlias('@webroot') . $imagePath;
@@ -32,7 +34,12 @@ class ImageHelper
     public function saveImage(UploadedFile $image): string
     {
         try {
-            $imageName = $this->getImageName('png');
+            $extension = $image->getExtension();
+            if (!ArrayHelper::isIn($extension, self::EXPECTED_TYPES)) {
+                throw new Exception('Exempted uploaded mine types are ' . implode(',', self::EXPECTED_TYPES));
+            }
+
+            $imageName = $this->getFilesCount() . '.' . $extension;
             $file = $this->directory . '/' . $imageName;
 
             FileHelper::createDirectory(FileHelper::normalizePath($this->directory), 775);
@@ -47,17 +54,16 @@ class ImageHelper
 
     /**
      * Generate name for image based on files count in directory
-     * @param string $type file type (like png, jpg)
      * @return string unique name for image
      */
-    private function getImageName(string $type): string
+    private function getFilesCount(): string
     {
-        $filecount = 0;
         $files = glob($this->directory . "/*");
+
         if ($files) {
-            $filecount = count($files) + 1;
+            return count($files) + 1;
         }
 
-        return $filecount . '.' . $type;
+        return 0;
     }
 }
