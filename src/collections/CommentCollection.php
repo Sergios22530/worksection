@@ -30,19 +30,20 @@ class CommentCollection extends Collection
         $this->validateFilterKeys($params, (new Comment()));
         $this->filterByUser($params);
 
-        $data = $this->getModels();
-        if ($data) {
-            foreach ($data as $key => $model) {
-                /** @var $model Model */
-                $modelAttributes = $model->getAttributes();
-                unset($modelAttributes['user']);
-                unset($params['user']);
-                $filterResult = array_diff($params, $modelAttributes);
-                if (!empty($filterResult)) {
-                    $this->removeModel($key);
-                }
-            }
+        if ($this->isEmpty()) {
+            return $this;
         }
+
+        $models = array_filter($this->getModels(), function ($model) use ($params) {
+            $modelAttributes = $model->getAttributes();
+            unset($modelAttributes['user']);
+            unset($params['user']);
+            return empty(array_diff($params, $modelAttributes));
+        });
+
+        $this->entity = $models;
+
+        return $this;
     }
 
     /**
@@ -67,18 +68,16 @@ class CommentCollection extends Collection
                 }
             }
 
-            $data = $this->getModels();
-            if ($data) {
-                foreach ($data as $key => $model) {
-                    $user = $model['user'];
-                    if ($user) {
-                        $filterResult = array_diff($params['user'], $user->getAttributes());
-                        if (!empty($filterResult)) {
-                            $this->removeModel($key);
-                        }
-                    }
-                }
+            if ($this->isEmpty()) {
+                return $this;
             }
+
+            $models = array_filter($this->getModels(), function ($model) use ($params) {
+                $user = $model['user'];
+                return empty(array_diff($params['user'], $user->getAttributes()));
+            });
+
+            $this->entity = $models;
         }
     }
 

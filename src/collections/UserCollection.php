@@ -17,19 +17,17 @@ class UserCollection extends Collection
     {
         $this->validateFilterKeys($params, (new User()));
 
-        $data = $this->getModels();
-        if ($data) {
-            foreach ($data as $key => $model) {
-                /** @var $model Model */
-                $modelAttributes = $model->getAttributes();
-                $filterResult = array_diff($params, $modelAttributes);
-                if (!empty($filterResult)) {
-                    $this->removeModel($key);
-                }
-            }
+        if ($this->isEmpty()) {
+            return $this;
         }
 
-        return $this->getModels();
+        $models = array_filter($this->getModels(), function ($model) use ($params) {
+            return empty(array_diff($params, $model->getAttributes()));
+        });
+
+        $this->entity = $models;
+
+        return $this;
     }
 
 

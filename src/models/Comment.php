@@ -72,15 +72,15 @@ class Comment extends WSModel
         throw new Exception('File is not defined');
     }
 
-    public function saveImage(UploadedFile $image, array $exeptedMineTypes = ['image/jpeg', 'image/png', 'image/pjpeg'])
+    public function saveImage(UploadedFile $image, array $exeptedMineTypes = ['jpeg', 'png', 'jpeg'])
     {
-        if (!ArrayHelper::isIn($image->type, $exeptedMineTypes)) {
+        if (!ArrayHelper::isIn($image->getExtension(), $exeptedMineTypes)) {
             throw new Exception('Exempted uploaded mine types are ' . implode(',', $exeptedMineTypes));
         }
         $imageHelper = new ImageHelper();
         $this->pathToImage = $imageHelper->saveImage($image);
     }
-
+    
     public function getImage()
     {
         return $this->pathToImage;

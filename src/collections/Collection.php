@@ -26,7 +26,11 @@ abstract class Collection
             unset($this->entity[$key]);
         }
     }
-   
+
+    public function isEmpty(){
+        return empty($this->entity);
+    }
+  
 
     public function validateFilterKeys(array $filterParams, $model)
     {
