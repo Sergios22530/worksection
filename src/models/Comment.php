@@ -5,6 +5,8 @@ namespace sergios\worksectionApi\src\models;
 use Exception;
 use sergios\worksectionApi\src\helpers\ImageHelper;
 use Yii;
+use yii\helpers\ArrayHelper;
+use yii\helpers\FileHelper;
 use yii\web\UploadedFile;
 use sergios\worksectionApi\src\models\User;
 
@@ -20,10 +22,10 @@ use sergios\worksectionApi\src\models\User;
 class Comment extends WSModel
 {
     public $text;
-    public $date_added;
+    public $date_added; // example  2019-07-24 11:01
     public $fileUrl;
-
-    private $user = null;
+    
+    public $user = null;
 
     protected $pathToImage = '';
     protected $todo = [];
@@ -33,7 +35,7 @@ class Comment extends WSModel
         return [
             ['text', 'required'],
             ['user', 'validateUser'],
-            [['text', 'date_added', 'fileUrl'], 'string'],
+            [['text', 'fileUrl','date_added'], 'string'],
         ];
     }
 
@@ -70,8 +72,11 @@ class Comment extends WSModel
         throw new Exception('File is not defined');
     }
 
-    public function saveImage(UploadedFile $image)
+    public function saveImage(UploadedFile $image, array $exeptedMineTypes = ['image/jpeg', 'image/png', 'image/pjpeg'])
     {
+        if (!ArrayHelper::isIn($image->type, $exeptedMineTypes)) {
+            throw new Exception('Exempted uploaded mine types are ' . implode(',', $exeptedMineTypes));
+        }
         $imageHelper = new ImageHelper();
         $this->pathToImage = $imageHelper->saveImage($image);
     }
@@ -94,16 +99,5 @@ class Comment extends WSModel
     public function setUser(User $user)
     {
         $this->user = $user;
-    }
-
-    public function issetUser()
-    {
-        return !is_null($this->user);
-    }
-
-    protected function filter(array $attributes)
-    {
-        //TO DO: FILTERING BY PARAMS FOR COMMENT
-        return true;
     }
 }

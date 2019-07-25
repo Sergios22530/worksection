@@ -39,8 +39,6 @@ class CommentMapper extends Mapper
             throw new Exception("Params cannot be empty");
         }
 
-        Yii::$app->params['filterParams'] = $params;
-
         $criteria = (new WSRequestCriteria('get_comments'))
             ->setPage($this->page)
             ->setParams($params);
@@ -48,7 +46,9 @@ class CommentMapper extends Mapper
         $data = WSRequest::getInstance()->get($criteria);
 
         if ($data) {
-            return $this->createCollection($data['data']);
+            $collection = $this->createCollection($data['data']);
+
+            return $collection->filterByAttributes($params);
         }
         //TODO: create error request
         return $data;
@@ -83,10 +83,18 @@ class CommentMapper extends Mapper
             ->setPage($this->page)
             ->setParams(CommentAdapter::toApi($model));
 
+        $filePath = $model->getImage();
+        if ($filePath) {
+            $criteria->setFilePath($filePath);
+        }
+
         $data = WSRequest::getInstance()->post($criteria);
 
         if ($data) {
-            return ['url' => $data['url']];
+            if ($filePath) {
+                $model->deleteImage();
+            }
+            return $model;
         }
 
         //TODO: create error request
@@ -98,7 +106,7 @@ class CommentMapper extends Mapper
         $model = new Comment();
         $model->setAttributes(CommentAdapter::toClient($attributes));
 
-        if ($model->validate() && $model->issetUser()) {
+        if ($model->validate()) {
             return $model;
         }
 

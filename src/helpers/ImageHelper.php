@@ -2,6 +2,7 @@
 
 namespace sergios\worksectionApi\src\helpers;
 
+use sergios\worksectionApi\src\services\WSRequest;
 use Yii;
 use yii\helpers\FileHelper;
 use Exception;
@@ -14,7 +15,7 @@ class ImageHelper
 
     public function __construct()
     {
-        $imagePath = '/uploads/tests';
+        $imagePath = WSRequest::getInstance()->getUploadPath();
         if (isset(Yii::$app->params['bugReport']['imagePath'])) {
             $imagePath = Yii::$app->params['bugReport']['imagePath'];
         }

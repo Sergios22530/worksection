@@ -13,7 +13,7 @@ use sergios\worksectionApi\src\WSApi;
  * @package frontend\components\worksectionApi\src\mappers
  *
  */
-abstract class Mapper //extends Model
+abstract class Mapper
 {
     abstract public function findAll();  
     

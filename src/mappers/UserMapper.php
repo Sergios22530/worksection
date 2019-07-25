@@ -15,17 +15,10 @@ use sergios\worksectionApi\src\adapters\UserAdapter;
 
 class UserMapper extends Mapper
 {
-    private $page;
-
-    public function __construct(string $page)
-    {
-        $this->page = $page;
-    }
 
     public function findAll()
     {
-        $criteria = (new WSRequestCriteria('get_users'))
-            ->setPage($this->page);
+        $criteria = (new WSRequestCriteria('get_users'));
 
         $data = WSRequest::getInstance()->get($criteria);
 
@@ -42,16 +35,15 @@ class UserMapper extends Mapper
             throw new Exception("Params cannot be empty");
         }
 
-        Yii::$app->params['filterParams'] = $params;
-
         $criteria = (new WSRequestCriteria('get_users'))
-            ->setPage($this->page)
             ->setParams($params);
 
         $data = WSRequest::getInstance()->get($criteria);
 
         if ($data) {
-            return $this->createCollection($data['data']);
+            $collection = $this->createCollection($data['data']);
+
+            return $collection->filterByAttributes($params);
         }
         //TODO: create error request
         return $data;

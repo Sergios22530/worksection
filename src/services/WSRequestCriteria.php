@@ -10,7 +10,7 @@ use Yii;
 class WSRequestCriteria
 {
     private $action;
-    private $page;
+    private $page = '';
     private $params = [];
     private $filePath = null;
 
@@ -18,10 +18,6 @@ class WSRequestCriteria
     public function __construct(String $action)
     {
         $this->action = $action;
-
-        $file = (new Comment())->getImage();
-
-        $this->filePath = ($file) ? $file : null;
 
         return $this;
     }
@@ -32,6 +28,16 @@ class WSRequestCriteria
     public function getFilePath()
     {
         return $this->filePath;
+    }
+
+    /**
+     * @param $filePath
+     * @return $this
+     */
+    public function setFilePath($filePath)
+    {
+        $this->filePath = $filePath;
+        return $this;
     }
 
     /**
