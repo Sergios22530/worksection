@@ -87,14 +87,9 @@ class Comment extends WSModel
         return $this->pathToImage;
     }
 
-    public static function getFilterAttributes()
+    public function getRelatedModelsNames()
     {
-        return ['text', 'date_added', 'user'];
-    }
-
-    public static function getRelatedFilterAttributes()
-    {
-        return ['email', 'name'];
+        return ['user'];
     }
 
     public function getTodoList()

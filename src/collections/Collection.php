@@ -36,16 +36,49 @@ abstract class Collection
         return empty($this->entity);
     }
 
-
-    public function validateFilterKeys(array $filterParams, $model)
+    /**
+     * Filter and validate comment models
+     * @param array $params
+     * @return CommentCollection
+     * @throws Exception
+     */
+    public function filterByAttributes(array $params)
     {
-        $exemptedAttributes = get_object_vars($model);
-        foreach ($filterParams as $key => $value) {
-            if (!ArrayHelper::keyExists($key, $exemptedAttributes)) {
-                throw new Exception('Exempted filter properties for model ' . (new \ReflectionClass($model))->getShortName() . ' are ' . implode(', ', $this->filterAttributes));
-            }
+        if ($this->isEmpty()) {
+            return $this;
         }
+
+        $models = array_filter($this->getModels(), function ($model) use ($params) {
+            return $model->isRelevant($params);
+        });
+
+        $this->entity = $models;
+
+        return $this;
     }
 
-    abstract public function filterByAttributes(array $params);
+    public function findByAttributes(array $params)
+    {
+        if ($this->isEmpty()) {
+            return $this;
+        }
+
+        $models = array_filter($this->getModels(), function ($model) use ($params) {
+            return $model->isRelevant($params);
+        });
+
+
+        return $models;
+    }
+
+
+//    public function validateFilterKeys(array $filterParams, $model)
+//    {
+//        $exemptedAttributes = get_object_vars($model);
+//        foreach ($filterParams as $key => $value) {
+//            if (!ArrayHelper::keyExists($key, $exemptedAttributes)) {
+//                throw new Exception('Exempted filter properties for model ' . (new \ReflectionClass($model))->getShortName() . ' are ' . implode(', ', $this->filterAttributes));
+//            }
+//        }
+//    }
 }

@@ -3,7 +3,9 @@
 namespace sergios\worksectionApi\src\collections;
 
 use Exception;
+use sergios\worksectionApi\src\mappers\UserMapper;
 use sergios\worksectionApi\src\models\Comment;
+use sergios\worksectionApi\src\models\WSModel;
 use yii\base\InvalidConfigException;
 use yii\base\Model;
 use yii\helpers\ArrayHelper;
@@ -18,76 +20,74 @@ use yii\helpers\VarDumper;
  */
 class CommentCollection extends Collection
 {
-    protected $filterAttributes;
-    protected $filterUserAttributes;
+//    protected $filterAttributes;
+//    protected $filterUserAttributes;
+//
+//    public function __construct()
+//    {
+//        $this->filterAttributes = Comment::getFilterAttributes();
+//        $this->filterUserAttributes = Comment::getRelatedFilterAttributes();
+//    }
 
-    public function __construct()
+    public function includeUsers()
     {
-        $this->filterAttributes = Comment::getFilterAttributes();
-        $this->filterUserAttributes = Comment::getRelatedFilterAttributes();
-    }
-
-    /**
-     * Filter and validate comment models
-     * @param array $params
-     * @return CommentCollection
-     * @throws Exception
-     */
-    public function filterByAttributes(array $params)
-    {
-        $this->validateFilterKeys($params, (new Comment()));
-        $this->filterByUser($params);
 
         if ($this->isEmpty()) {
             return $this;
         }
 
-        $models = array_filter($this->getModels(), function ($model) use ($params) {
-            $modelAttributes = $model->getAttributes();
-            unset($modelAttributes['user']);
-            unset($params['user']);
-            return empty(array_diff($params, $modelAttributes));
-        });
+        $userMapper = new UserMapper();
+        $userCollection = $userMapper->findAll();
 
-        $this->entity = $models;
+        if ($userCollection->isEmpty()) {
+            return $this;
+        }
+
+        array_map(function ($entity) use ($userCollection) {
+            $user = $userCollection->findByAttributes(['email' => $entity->user->email]);
+
+            if ($user) {
+                $entity->setUser($user);
+            }
+
+            return $entity;
+        }, $this->entity);
 
         return $this;
     }
 
-    /**
-     * Filter and validate user models
-     * @param array $params
-     * @return CommentCollection
-     * @throws InvalidConfigException
-     */
-    protected function filterByUser(array $params)
-    {
-        if (ArrayHelper::keyExists('user', $params)) {
-            $userAttributes = $params['user'];
-            if (!is_array($userAttributes)) {
-                throw new InvalidConfigException('user attribute must be array');
-            }
-            if (empty($userAttributes)) {
-                throw new InvalidConfigException('user attribute must be not empty');
-            }
 
-            foreach ($this->filterUserAttributes as $filterAttribute) {
-                if (!ArrayHelper::keyExists($filterAttribute, $userAttributes)) {
-                    throw new InvalidConfigException('Exempted filter properties for model User are ' . implode(', ', $this->filterUserAttributes));
-                }
-            }
+    //TODO:: крайне спорный метод... а потом будет метод findByIssue? Или findByProject? Плохо расширяемый метод.
 
-            if ($this->isEmpty()) {
-                return $this;
-            }
-
-            $models = array_filter($this->getModels(), function ($model) use ($params) {
-                $user = $model['user'];
-                return empty(array_diff($params['user'], $user->getAttributes()));
-            });
-
-            $this->entity = $models;
-        }
-    }
-
+//    protected function filterByUser(array $params)
+//    {
+//        if (!ArrayHelper::keyExists('user', $params)) {
+//            return null;
+//        }
+//
+//        $userAttributes = $params['user'];
+//        if (!is_array($userAttributes)) {
+//            throw new InvalidConfigException('user attribute must be array');
+//        }
+//        if (empty($userAttributes)) {
+//            throw new InvalidConfigException('user attribute must be not empty');
+//        }
+//
+//        foreach ($this->filterUserAttributes as $filterAttribute) {
+//            if (!ArrayHelper::keyExists($filterAttribute, $userAttributes)) {
+//                throw new InvalidConfigException('Exempted filter properties for model User are ' . implode(', ', $this->filterUserAttributes));
+//            }
+//        }
+//
+//        if ($this->isEmpty()) {
+//            return $this;
+//        }
+//
+//        $models = array_filter($this->getModels(), function ($model) use ($params) {
+//            $user = $model['user'];
+//            return empty(array_diff($params['user'], $user->getAttributes()));
+//        });
+//
+//        $this->entity = $models;
+//    }
 }

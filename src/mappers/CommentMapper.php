@@ -47,6 +47,7 @@ class CommentMapper extends Mapper
         }
 
         $collection = $this->createCollection($response['data']);
+        $collection->includeUsers();
 
         return $collection->filterByAttributes($params);
     }
