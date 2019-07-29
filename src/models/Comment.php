@@ -22,7 +22,7 @@ use yii\web\UploadedFile;
 class Comment extends WSModel
 {
     public $text;
-    public $date_added; // example  2019-07-24 11:01
+    public $dateAdded; // example  2019-07-24 11:01
     public $fileUrl;
 
     public $user = null;
@@ -35,7 +35,7 @@ class Comment extends WSModel
         return [
             ['text', 'required'],
             ['user', 'validateUser'],
-            [['text', 'fileUrl', 'date_added'], 'string'],
+            [['text', 'fileUrl', 'dateAdded'], 'string'],
         ];
     }
 
@@ -87,7 +87,7 @@ class Comment extends WSModel
         return $this->pathToImage;
     }
 
-    public function getRelatedModelsNames()
+    protected function getRelatedModelsNames()
     {
         return ['user'];
     }
@@ -101,4 +101,6 @@ class Comment extends WSModel
     {
         return $this->user;
     }
+    
+    
 }

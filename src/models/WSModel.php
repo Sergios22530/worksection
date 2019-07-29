@@ -5,6 +5,7 @@ namespace sergios\worksectionApi\src\models;
 use Exception;
 use \ReflectionClass;
 use \yii\base\Model;
+use yii\helpers\ArrayHelper;
 
 abstract class WSModel extends Model
 {
@@ -45,7 +46,7 @@ abstract class WSModel extends Model
         foreach ($filterParams as $fieldKey => $fieldValue) {
             //for related entities
             if (in_array($fieldKey, $relatedAttributes)) {
-                if ($this->$$fieldKey && !$this->$$fieldKey->isRelevant($fieldValue)) {
+                if ($this->{$fieldKey} && !$this->{$fieldKey}->isRelevant($fieldValue)) {
                     return false;
                 }
 
@@ -53,11 +54,14 @@ abstract class WSModel extends Model
             }
 
             //for simple attributes
-            if ($this->$$fieldKey !== $fieldValue) {
+            if ($this->{$fieldKey} !== $fieldValue) {
                 return false;
             }
         }
 
         return true;
     }
+
+
+    abstract protected function getRelatedModelsNames();
 }

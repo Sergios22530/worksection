@@ -35,8 +35,8 @@ class CommentCollection extends Collection
         array_map(function ($entity) use ($userCollection) {
             $user = $userCollection->findByAttributes(['email' => $entity->user->email]);
 
-            if ($user) {
-                $entity->setUser($user);
+            if (count($user)) {
+                $entity->setUser(array_pop($user));
             }
 
             return $entity;

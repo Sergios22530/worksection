@@ -35,7 +35,7 @@ class CommentAdapter extends Adapter
 
         $resultAttributes = [
             'text' => $attribute['text'],
-            'date_added' => $attribute['date_added']
+            'dateAdded' => $attribute['date_added']
         ];
 
         if ($user->validate()) {

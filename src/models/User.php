@@ -35,4 +35,8 @@ class User extends WSModel
         return ['id', 'email', 'firstName', 'lastName', 'name', 'post', 'avatar', 'company', 'department'];
     }
 
+    protected function getRelatedModelsNames()
+    {
+        return [];
+    }
 }

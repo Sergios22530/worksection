@@ -2,7 +2,7 @@
 ------------
 
 ```
-composer require sergios/yii2-worksection:dev-master
+composer require sergios/yii2-worksection
 ```
 
 #### Для установки домена, api ключа, директории для загрузки файлов в common/config/params необходимо положить следующие настройки:
@@ -25,17 +25,35 @@ use sergios\worksectionApi\src\mappers\CommentMapper;
 
 $commentMapper = new CommentMapper('ссылка на задачу');// Пример /project/51000/7784366/ 
 
-//В findByAttribures ограниченная передача параметров так как api не предоставляет больше данных при поиске комментариев. 
+//В findByAttributes передача параметров происходит по атрибутах 2 моделей (Comments,User). 
 //Имя полей моделей которое можно передавать в метод findByAttribures:
-//     - модель User (['user' => ['email' => 'email','name' => 'name']]);
-//     - модель Comment (['date_added' => 'date','text' => 'Text value']);
+//     - модель User ([
+            'user' => [
+                'id' => 'id',
+                'lastName' => 'lastName',
+                'email' => 'email',
+                'name' => 'name',
+                'post' => 'post',
+                'avatar' => 'avatar',
+                'company' => 'company',
+                'department' => 'department'
+            ]
+        ]);
+//     - модель Comment (['dateAdded' => 'date','text' => 'Text value']);
 $commentCollection = $commentMapper->findByAttributes([
-   'date_added' => '2019-07-24 11:01', // Формат YYYY-MM-DD hh:mm
+   'dateAdded' => '2019-07-24 11:01', // Формат YYYY-MM-DD hh:mm
    'text' => 'Test', //Текст комментария
    'user' => [
-       'email' => 'email', //Пример - test@gmail.com
-       'name' => 'name' //Пример - Василий Петрович
-   ]
+        'id' => user ID, // integer or string
+        'lastName' => 'Фамилия',
+        'firstName' => 'Василий',
+        'email' => 'test@gmail.com',
+        'name' => 'Василий Петрович',
+        'post' => 'Backend developer', // должность
+        'avatar' => 'https://ссылки-на-аватар',
+        'company' => 'Название компании',
+        'department' => 'Отдел',
+    ]
 ]);//возвращает коллекцию комментариев по критериях поиска
 $commentCollection = $commentMapper->findAll();//возвращает коллекцию всех комментариев
 ```
