@@ -39,7 +39,11 @@ $commentMapper = new CommentMapper('ссылка на задачу');// Прим
                         'department' => String
                     ]
                 ];
-// - модель Comment ['dateAdded' => String,'text' => String];
+// - модель Comment 
+    [
+        'dateAdded' => String,
+        'text' => String
+    ];
 
 $commentCollection = $commentMapper->findByAttributes([
    'dateAdded' => '2019-07-24 11:01', // Формат YYYY-MM-DD hh:mm
