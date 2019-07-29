@@ -24,6 +24,11 @@ composer require sergios/yii2-worksection:dev-master
 use sergios\worksectionApi\src\mappers\CommentMapper;
 
 $commentMapper = new CommentMapper('ссылка на задачу');// Пример /project/51000/7784366/ 
+
+//В findByAttribures ограниченная передача параметров так как api не предоставляет больше данных при поиске комментариев. 
+//Имя полей моделей которое можно передавать в метод findByAttribures:
+     - модель User (['user' => ['email' => 'email','name' => 'name']]);
+     - модель Comment (['date_added' => 'date','text' => 'Text value']);
 $commentCollection = $commentMapper->findByAttributes([
    'date_added' => '2019-07-24 11:01', // Формат YYYY-MM-DD hh:mm
    'text' => 'Test', //Текст комментария
@@ -66,6 +71,7 @@ $userMapper = new UserMapper();
 $userCollection = $userMapper->findAll(); //возвращает коллекцию всех пользователей
 
 //поиск пользователей по критериям
+//В findByAttribures нужно передавать имя полей которое есть в модели User.
 $userCollection = $userMapper->findByAttributes([
     'id' => 51659, // id пользователя
     'email' => 'email',
