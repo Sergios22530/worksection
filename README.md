@@ -27,19 +27,20 @@ $commentMapper = new CommentMapper('ссылка на задачу');// Прим
 
 //В findByAttributes передача параметров происходит по атрибутах 2 моделей (Comments,User). 
 //Имя полей моделей которое можно передавать в метод findByAttribures:
-//     - модель User ([
-            'user' => [
-                'id' => 'id',
-                'lastName' => 'lastName',
-                'email' => 'email',
-                'name' => 'name',
-                'post' => 'post',
-                'avatar' => 'avatar',
-                'company' => 'company',
-                'department' => 'department'
-            ]
-        ]);
-//     - модель Comment (['dateAdded' => 'date','text' => 'Text value']);
+// - модель User [
+                    'user' => [
+                        'id' => Integer | String,
+                        'lastName' => String,
+                        'email' => String,
+                        'name' => String,
+                        'post' => String,
+                        'avatar' => String,
+                        'company' => String,
+                        'department' => String
+                    ]
+                ];
+// - модель Comment ['dateAdded' => String,'text' => String];
+
 $commentCollection = $commentMapper->findByAttributes([
    'dateAdded' => '2019-07-24 11:01', // Формат YYYY-MM-DD hh:mm
    'text' => 'Test', //Текст комментария
