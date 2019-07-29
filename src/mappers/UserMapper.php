@@ -82,19 +82,13 @@ class UserMapper extends Mapper
         return null;
     }
 
+    //TODO:: мб можно вынести кусок метода в родительский класс
     protected function createCollection(array $data)
     {
         $collection = new UserCollection();
 
         foreach ($data as $attributes) {
-
-            $model = $this->createModel($attributes);
-            if ($model) {
-                $collection->setModel($model);
-                continue;
-            }
-
-            //todo set logger here
+            $collection->setModel($this->createModel($attributes));
         }
 
         return $collection;

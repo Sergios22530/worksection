@@ -23,14 +23,6 @@ class WSRequestCriteria
     }
 
     /**
-     * @return string|null
-     */
-    public function getFilePath()
-    {
-        return $this->filePath;
-    }
-
-    /**
      * @param $filePath
      * @return $this
      */
@@ -83,5 +75,14 @@ class WSRequestCriteria
     public function getParams()
     {
         return (!empty($this->params)) ? $this->params : [];
+    }
+
+
+    /**
+     * @return string|null
+     */
+    public function getFilePath()
+    {
+        return $this->filePath;
     }
 }

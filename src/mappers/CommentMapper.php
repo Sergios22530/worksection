@@ -21,16 +21,14 @@ class CommentMapper extends Mapper
 
     public function findAll()
     {
-        $criteria = (new WSRequestCriteria('get_comments'))
-            ->setPage($this->page);
+        $criteria = (new WSRequestCriteria('get_comments'))->setPage($this->page);
 
-        $data = WSRequest::getInstance()->get($criteria);
-
-        if ($data) {
-            return $this->createCollection($data['data']); //TODO: FILTERING DATA
+        $response = WSRequest::getInstance()->get($criteria);
+        if (!$response) {
+            throw new Exception('Не удалось получить ответ от worksection api');
         }
-        //TODO: create error request
-        return $data;
+
+        return $this->createCollection($response['data']);
     }
 
     public function findByAttributes(array $params)
@@ -43,15 +41,14 @@ class CommentMapper extends Mapper
             ->setPage($this->page)
             ->setParams($params);
 
-        $data = WSRequest::getInstance()->get($criteria);
-
-        if ($data) {
-            $collection = $this->createCollection($data['data']);
-
-            return $collection->filterByAttributes($params);
+        $response = WSRequest::getInstance()->get($criteria);
+        if (!$response) {
+            throw new Exception('Не удалось получить ответ от worksection api');
         }
-        //TODO: create error request
-        return $data;
+
+        $collection = $this->createCollection($response['data']);
+
+        return $collection->filterByAttributes($params);
     }
 
     public function delete()
@@ -88,17 +85,15 @@ class CommentMapper extends Mapper
             $criteria->setFilePath($filePath);
         }
 
-        $data = WSRequest::getInstance()->post($criteria);
-
-        if ($data) {
-            if ($filePath) {
-                $model->deleteImage();
-            }
-            return $model;
+        if (!WSRequest::getInstance()->post($criteria)) {
+            throw new Exception('Не удалось получить ответ от worksection api');
         }
 
-        //TODO: create error request
-        return $data;
+        if ($filePath) {
+            $model->deleteImage();
+        }
+
+        return $model;
     }
 
     protected function createModel(array $attributes)
@@ -119,14 +114,7 @@ class CommentMapper extends Mapper
         $collection = new CommentCollection();
 
         foreach ($data as $attributes) {
-
-            $model = $this->createModel($attributes);
-            if ($model) {
-                $collection->setModel($model);
-                continue;
-            }
-
-            //todo set logger here
+            $collection->setModel($this->createModel($attributes));
         }
 
         return $collection;

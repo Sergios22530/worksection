@@ -30,33 +30,6 @@ class User extends WSModel
         ];
     }
 
-    public function setAttributes($values, $safeOnly = true)
-    {
-        if (!empty($this->filter($values))) {
-            parent::setAttributes($values, $safeOnly);
-        }
-    }
-
-    /**
-     * Filter data by user params
-     * @param array $attributes
-     * @return array
-     */
-    protected function filter(array $attributes)
-    {
-        if (ArrayHelper::keyExists('filterParams', Yii::$app->params)) {
-            array_diff_ukey($attributes, Yii::$app->params['filterParams'], function ($modelKey, $filterKey) use (&$attributes) {
-                if ($modelKey == $filterKey) {
-                    if ($attributes[$modelKey] != Yii::$app->params['filterParams'][$modelKey]) {
-                        $attributes = [];
-                    }
-                }
-            });
-        }
-
-        return $attributes;
-    }
-
     public static function getFilterAttributes()
     {
         return ['id', 'email', 'firstName', 'lastName', 'name', 'post', 'avatar', 'company', 'department'];

@@ -2,12 +2,12 @@
 
 namespace sergios\worksectionApi\src\collections;
 
-
 use Exception;
 use sergios\worksectionApi\src\models\Comment;
 use yii\base\InvalidConfigException;
 use yii\base\Model;
 use yii\helpers\ArrayHelper;
+use yii\helpers\VarDumper;
 
 /**
  * Class CommentCollection
@@ -30,6 +30,8 @@ class CommentCollection extends Collection
     /**
      * Filter and validate comment models
      * @param array $params
+     * @return CommentCollection
+     * @throws Exception
      */
     public function filterByAttributes(array $params)
     {
@@ -55,6 +57,7 @@ class CommentCollection extends Collection
     /**
      * Filter and validate user models
      * @param array $params
+     * @return CommentCollection
      * @throws InvalidConfigException
      */
     protected function filterByUser(array $params)

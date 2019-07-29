@@ -9,8 +9,12 @@ abstract class Collection
 {
     protected $entity = [];
 
-    public function setModel($model)
+    public function setModel($model = null)
     {
+        if (!$model) {
+            return;
+        }
+
         //TODO check for identity
         $this->entity[] = $model;
     }
@@ -27,10 +31,11 @@ abstract class Collection
         }
     }
 
-    public function isEmpty(){
+    public function isEmpty()
+    {
         return empty($this->entity);
     }
-  
+
 
     public function validateFilterKeys(array $filterParams, $model)
     {
@@ -39,7 +44,6 @@ abstract class Collection
             if (!ArrayHelper::keyExists($key, $exemptedAttributes)) {
                 throw new Exception('Exempted filter properties for model ' . (new \ReflectionClass($model))->getShortName() . ' are ' . implode(', ', $this->filterAttributes));
             }
-
         }
     }
 

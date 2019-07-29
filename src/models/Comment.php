@@ -4,11 +4,11 @@ namespace sergios\worksectionApi\src\models;
 
 use Exception;
 use sergios\worksectionApi\src\helpers\ImageHelper;
+use sergios\worksectionApi\src\models\User;
 use Yii;
 use yii\helpers\ArrayHelper;
 use yii\helpers\FileHelper;
 use yii\web\UploadedFile;
-use sergios\worksectionApi\src\models\User;
 
 /**
  * Class Comment
@@ -46,6 +46,10 @@ class Comment extends WSModel
         }
     }
 
+    public function setUser(User $user)
+    {
+        $this->user = $user;
+    }
 
     public function setTodo(int $index, string $text)
     {
@@ -72,11 +76,8 @@ class Comment extends WSModel
         throw new Exception('File is not defined');
     }
 
-    public function saveImage(UploadedFile $image, array $exeptedMineTypes = ['jpeg', 'png', 'jpeg'])
+    public function saveImage(UploadedFile $image)
     {
-        if (!ArrayHelper::isIn($image->getExtension(), $exeptedMineTypes)) {
-            throw new Exception('Exempted uploaded mine types are ' . implode(',', $exeptedMineTypes));
-        }
         $imageHelper = new ImageHelper();
         $this->pathToImage = $imageHelper->saveImage($image);
     }
@@ -105,10 +106,4 @@ class Comment extends WSModel
     {
         return $this->user;
     }
-
-    public function setUser(User $user)
-    {
-        $this->user = $user;
-    }
-
 }

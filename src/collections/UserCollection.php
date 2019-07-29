@@ -4,6 +4,7 @@ namespace sergios\worksectionApi\src\collections;
 
 use sergios\worksectionApi\src\models\User;
 use yii\base\Model;
+use Exception;
 
 class UserCollection extends Collection
 {
@@ -17,6 +18,8 @@ class UserCollection extends Collection
     /**
      * Filter and validate comment models
      * @param array $params
+     * @return UserCollection
+     * @throws Exception
      */
     public function filterByAttributes(array $params)
     {

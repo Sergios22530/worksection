@@ -6,5 +6,4 @@ use \yii\base\Model;
 
 abstract class WSModel extends Model
 {
-    
 }
