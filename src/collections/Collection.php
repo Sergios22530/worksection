@@ -70,15 +70,4 @@ abstract class Collection
 
         return $models;
     }
-
-
-//    public function validateFilterKeys(array $filterParams, $model)
-//    {
-//        $exemptedAttributes = get_object_vars($model);
-//        foreach ($filterParams as $key => $value) {
-//            if (!ArrayHelper::keyExists($key, $exemptedAttributes)) {
-//                throw new Exception('Exempted filter properties for model ' . (new \ReflectionClass($model))->getShortName() . ' are ' . implode(', ', $this->filterAttributes));
-//            }
-//        }
-//    }
 }

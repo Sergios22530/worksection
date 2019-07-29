@@ -28,7 +28,8 @@ class CommentMapper extends Mapper
             throw new Exception('Не удалось получить ответ от worksection api');
         }
 
-        return $this->createCollection($response['data']);
+        $collection = $this->createCollection($response['data']);
+        return $collection->includeUsers();
     }
 
     public function findByAttributes(array $params)

@@ -20,22 +20,11 @@ use yii\helpers\VarDumper;
  */
 class CommentCollection extends Collection
 {
-//    protected $filterAttributes;
-//    protected $filterUserAttributes;
-//
-//    public function __construct()
-//    {
-//        $this->filterAttributes = Comment::getFilterAttributes();
-//        $this->filterUserAttributes = Comment::getRelatedFilterAttributes();
-//    }
-
     public function includeUsers()
     {
-
         if ($this->isEmpty()) {
             return $this;
         }
-
         $userMapper = new UserMapper();
         $userCollection = $userMapper->findAll();
 
@@ -55,39 +44,4 @@ class CommentCollection extends Collection
 
         return $this;
     }
-
-
-    //TODO:: крайне спорный метод... а потом будет метод findByIssue? Или findByProject? Плохо расширяемый метод.
-
-//    protected function filterByUser(array $params)
-//    {
-//        if (!ArrayHelper::keyExists('user', $params)) {
-//            return null;
-//        }
-//
-//        $userAttributes = $params['user'];
-//        if (!is_array($userAttributes)) {
-//            throw new InvalidConfigException('user attribute must be array');
-//        }
-//        if (empty($userAttributes)) {
-//            throw new InvalidConfigException('user attribute must be not empty');
-//        }
-//
-//        foreach ($this->filterUserAttributes as $filterAttribute) {
-//            if (!ArrayHelper::keyExists($filterAttribute, $userAttributes)) {
-//                throw new InvalidConfigException('Exempted filter properties for model User are ' . implode(', ', $this->filterUserAttributes));
-//            }
-//        }
-//
-//        if ($this->isEmpty()) {
-//            return $this;
-//        }
-//
-//        $models = array_filter($this->getModels(), function ($model) use ($params) {
-//            $user = $model['user'];
-//            return empty(array_diff($params['user'], $user->getAttributes()));
-//        });
-//
-//        $this->entity = $models;
-//    }
 }
