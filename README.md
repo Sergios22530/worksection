@@ -10,7 +10,7 @@ composer require sergios/yii2-worksection:dev-master
 ```php
 'worksection-api' => [
     'domain' => 'https://api домен', // api домен worksection вашей компании (Пример - https://doris.worksection.com) 
-    'apiKey' => 'api ключ', // api key - (генерировать может только админ приложения)
+    'apiKey' => 'api ключ', // api hash key - (генерировать может только админ приложения)
     'uploadPath' => '/uploads/tests' // временный путь для сохранения файлов относительно webroot (после передачи файла api он будет автоматически удален)
 ]
 ```
