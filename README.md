@@ -27,8 +27,8 @@ $commentMapper = new CommentMapper('ссылка на задачу');// Прим
 
 //В findByAttribures ограниченная передача параметров так как api не предоставляет больше данных при поиске комментариев. 
 //Имя полей моделей которое можно передавать в метод findByAttribures:
-     - модель User (['user' => ['email' => 'email','name' => 'name']]);
-     - модель Comment (['date_added' => 'date','text' => 'Text value']);
+//     - модель User (['user' => ['email' => 'email','name' => 'name']]);
+//     - модель Comment (['date_added' => 'date','text' => 'Text value']);
 $commentCollection = $commentMapper->findByAttributes([
    'date_added' => '2019-07-24 11:01', // Формат YYYY-MM-DD hh:mm
    'text' => 'Test', //Текст комментария
