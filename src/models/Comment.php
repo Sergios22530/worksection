@@ -24,7 +24,7 @@ class Comment extends WSModel
     public $text;
     public $date_added; // example  2019-07-24 11:01
     public $fileUrl;
-    
+
     public $user = null;
 
     protected $pathToImage = '';
@@ -35,7 +35,7 @@ class Comment extends WSModel
         return [
             ['text', 'required'],
             ['user', 'validateUser'],
-            [['text', 'fileUrl','date_added'], 'string'],
+            [['text', 'fileUrl', 'date_added'], 'string'],
         ];
     }
 
@@ -80,10 +80,20 @@ class Comment extends WSModel
         $imageHelper = new ImageHelper();
         $this->pathToImage = $imageHelper->saveImage($image);
     }
-    
+
     public function getImage()
     {
         return $this->pathToImage;
+    }
+
+    public static function getFilterAttributes()
+    {
+        return ['text', 'date_added', 'user'];
+    }
+
+    public static function getRelatedFilterAttributes()
+    {
+        return ['email', 'name'];
     }
 
     public function getTodoList()
@@ -100,4 +110,5 @@ class Comment extends WSModel
     {
         $this->user = $user;
     }
+
 }

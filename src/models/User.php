@@ -43,7 +43,7 @@ class User extends WSModel
      * @return array
      */
     protected function filter(array $attributes)
-    {        
+    {
         if (ArrayHelper::keyExists('filterParams', Yii::$app->params)) {
             array_diff_ukey($attributes, Yii::$app->params['filterParams'], function ($modelKey, $filterKey) use (&$attributes) {
                 if ($modelKey == $filterKey) {
@@ -55,6 +55,11 @@ class User extends WSModel
         }
 
         return $attributes;
+    }
+
+    public static function getFilterAttributes()
+    {
+        return ['id', 'email', 'firstName', 'lastName', 'name', 'post', 'avatar', 'company', 'department'];
     }
 
 }

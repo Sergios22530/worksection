@@ -18,8 +18,14 @@ use yii\helpers\ArrayHelper;
  */
 class CommentCollection extends Collection
 {
-    protected $filterAttributes = ['text', 'date_added', 'user'];
-    protected $filterUserAttributes = ['email', 'name'];
+    protected $filterAttributes;
+    protected $filterUserAttributes;
+
+    public function __construct()
+    {
+        $this->filterAttributes = Comment::getFilterAttributes();
+        $this->filterUserAttributes = Comment::getRelatedFilterAttributes();
+    }
 
     /**
      * Filter and validate comment models

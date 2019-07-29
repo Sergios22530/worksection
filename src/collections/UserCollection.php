@@ -7,7 +7,12 @@ use yii\base\Model;
 
 class UserCollection extends Collection
 {
-    protected $filterAttributes = ['id', 'email', 'firstName', 'lastName', 'name', 'post', 'avatar', 'company', 'department'];
+    protected $filterAttributes;
+
+    public function __construct()
+    {
+        $this->filterAttributes = User::getFilterAttributes();
+    }
 
     /**
      * Filter and validate comment models
