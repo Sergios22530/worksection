@@ -5,7 +5,7 @@
 composer require sergios/yii2-worksection:dev-master
 ```
 
-####Для установки домена, api ключа, директории для загрузки файлов в common/config/params необходимо положить следующие настройки:
+#### Для установки домена, api ключа, директории для загрузки файлов в common/config/params необходимо положить следующие настройки:
 
 ```php
 'worksection-api' => [
@@ -17,9 +17,9 @@ composer require sergios/yii2-worksection:dev-master
 
 Использование
 -----
-####Работа с комментариями
+#### Работа с комментариями
 
-#####Поиск комментариев
+##### Поиск комментариев
 ```php
 use sergios\worksectionApi\src\mappers\CommentMapper;
 
@@ -34,7 +34,7 @@ $commentCollection = $commentMapper->findByAttributes([
 ]);//возвращает коллекцию комментариев по критериях поиска
 $commentCollection = $commentMapper->findAll();//возвращает коллекцию всех комментариев
 ```
-#####Создание кометария
+##### Создание кометария
 ```php
 use sergios\worksectionApi\src\models\Comment;
 use sergios\worksectionApi\src\mappers\CommentMapper;
@@ -58,7 +58,7 @@ $comment->setUser($user);//привязка пользователя к комм
 $commentMapper = $commentMapper->create($comment);//Создание кометария (возвращает объект созданного комментария) 
 ```
 
-####Работа с пользователями
+#### Работа с пользователями
 ```php
 use sergios\worksectionApi\src\mappers\UserMapper;
 
