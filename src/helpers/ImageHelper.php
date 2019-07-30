@@ -7,6 +7,7 @@ use Yii;
 use yii\helpers\FileHelper;
 use Exception;
 use yii\web\UploadedFile;
+use yii\helpers\ArrayHelper;
 
 class ImageHelper
 {
