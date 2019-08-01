@@ -15,7 +15,7 @@ use yii\web\UploadedFile;
  * @package sergios\worksectionApi\src\models
  *
  * @property string $text
- * @property string $date_added
+ * @property string $dateAdded
  * @property string $fileUrl
  * @property $user User
  */

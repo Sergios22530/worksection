@@ -43,7 +43,7 @@ class CommentAdapter extends Adapter
         }
 
         if (ArrayHelper::keyExists('files', $attribute) && !empty($attribute['files'])) {
-            $resultAttributes['file'] = WSRequest::getInstance()->getApiDomain() . $attribute['files'][0]['link'];
+            $resultAttributes['fileUrl'] = WSRequest::getInstance()->getApiDomain() . $attribute['files'][0]['link'];
         }
 
         return $resultAttributes;
